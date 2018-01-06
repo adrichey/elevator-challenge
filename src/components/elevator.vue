@@ -11,9 +11,13 @@ export default {
       type: Number,
       required: true,
     },
+    bottomFloor: {
+      type: Number,
+      required: true,
+    },
     floors: {
       type: Number,
-      default: 0,
+      required: true,
     },
     currentTick: {
       type: Number,
@@ -21,7 +25,7 @@ export default {
     },
     requested: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   data () {
@@ -32,11 +36,27 @@ export default {
       currentFloor: 1,
     }
   },
+  methods: {
+    moveOneFloor() {
+      if (this.doorsOpen) {
+        return this.currentFloor;
+      }
+
+      if (this.direction === 'up' && this.currentFloor < this.floors) {
+        this.currentFloor += 1;
+      } else if (this.direction === 'down' && this.currentFloor > this.bottomFloor) {
+        this.currentFloor -= 1;
+      }
+
+      this.$emit('elevator.moving', this.moving, this.direction, this.currentFloor);
+
+      return this.currentFloor();
+    }
+  },
   watch: {
     currentTick() {
       if (this.moving) {
-        this.currentFloor += 1;
-        this.$emit('elevator.moving', this.moving, this.direction, this.currentFloor);
+        this.moveOneFloor();
       }
     },
     doorsOpen() {

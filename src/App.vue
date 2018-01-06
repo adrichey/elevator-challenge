@@ -3,6 +3,7 @@
     <elevator
       v-for="(elevator, index) in elevators" :key="index"
       :floors="floors"
+      :bottom-floor="bottomFloor"
       :current-tick="currentTick"
       :requested="requested"
       :id="elevator.id"></elevator>
@@ -22,7 +23,7 @@ export default {
   data () {
     return {
       bottomFloor: 1,
-      floors: 1,
+      floors: 10,
       requested: false,
       elevators: data,
       started: false,
