@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import elevator from './components/elevator'
+import elevator from './components/elevator';
+import data from './assets/data';
 
 export default {
   name: 'app',
@@ -17,12 +18,35 @@ export default {
       bottomFloor: 1,
       floors: 1,
       isRequested: false,
-      elevators: [
-        { isMoving }
-      ]
+      elevators: data,
+      started: false,
+      interval: null,
+    }
+  },
+  mounted() {
+    // Once mounted, begin a timer function that will relay states
+    // to the various elevators
+    this.started = true;
+  },
+  methods: {
+    relayInformationToElevators() {
+      const elevatorsLength = this.elevators.length;
+      let i;
+      for (i = 0; i < elevatorsLength; i += 1) {
+        // Set data
+      }
+    }
+  },
+  watch: {
+    started(flag) {
+      if (flag) {
+        this.interval = setInterval(this.relayInformationToElevators, 1000);
+      } else {
+        clearInterval(this.interval);
+      }
     }
   }
-}
+};
 </script>
 
 <style>

@@ -10,6 +10,9 @@ export default {
     return {
       floors: 1,
     }
+  },
+  methods: {
+    
   }
 }
 </script>
