@@ -1,6 +1,6 @@
 # elevator-challenge
 
-> Elevator Programming Challenge
+## Elevator Programming Challenge
 
 You should plan to spend 2 hours on this challenge, committing to a github repo approximately every 15 minutes.
 
