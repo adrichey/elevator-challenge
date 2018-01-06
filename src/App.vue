@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <elevator></elevator>
+    <elevator
+      v-for="(elevator, index) in elevators" :key="index"
+      :floors="floors"
+      :current-tick="currentTick"
+      :is-moving="elevator.isMoving"></elevator>
   </div>
 </template>
 
@@ -30,10 +34,12 @@ export default {
   },
   methods: {
     relayInformationToElevators() {
-      const elevatorsLength = this.elevators.length;
-      let i;
-      for (i = 0; i < elevatorsLength; i += 1) {
-        // Set data
+      if (this.started) {
+        const elevatorsLength = this.elevators.length;
+        let i;
+        for (i = 0; i < elevatorsLength; i += 1) {
+          this.elevators.currentTick = Date.now();
+        }
       }
     }
   },
@@ -43,6 +49,16 @@ export default {
         this.interval = setInterval(this.relayInformationToElevators, 1000);
       } else {
         clearInterval(this.interval);
+      }
+    },
+    isRequested(flag) {
+      if (flag) {
+        const elevatorsLength = this.elevators.length;
+        let i;
+        for (i = 0; i < elevatorsLength; i += 1) {
+          if ()
+          this.elevators.currentTick = Date.now();
+        }
       }
     }
   }
