@@ -13,8 +13,7 @@
       :current-tick="currentTick"
       :requested="requested"
       :floor-requested="floorRequested"
-      :id="elevator.id"
-      @requestAnswered="requestAnswered(elevator.id)"></elevator>
+      :elevator-id="index"></elevator>
   </div>
 </template>
 
@@ -29,15 +28,18 @@ export default {
   },
   data () {
     return {
-      bottomFloor: 1,
-      floors: 14,
+      bottomFloor: 1, // Fulfills #1: Min floor of 1.
+      floors: 14, // Fulfills #1: Desired number of floors
       requested: false,
-      elevators: data,
+      elevators: data, // Fulfills #1: Desired number of elevators initialization
       started: false,
       interval: null,
       currentTick: 0,
       floorRequested: 1,
     }
+  },
+  created() {
+    this.$on('elevator.moving', this.updateElevator);
   },
   mounted() {
     // Once mounted, begin a timer function that will relay states
@@ -50,8 +52,12 @@ export default {
         this.currentTick = Date.now();
       }
     },
-    requestAnswered(elevatorId) {
-      // TODO
+    updateElevator(elevatorId, moving, direction, currentFloor) {
+      elevators[`${elevatorId}`] = Object.assign(
+        {},
+        elevators[`${elevatorId}`],
+        { elevatorId, moving, direction, currentFloor }
+      );
     }
   },
   watch: {

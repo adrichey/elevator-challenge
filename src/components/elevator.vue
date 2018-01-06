@@ -1,6 +1,6 @@
 <template>
   <div class="elevator">
-    <h1>Elevator {{ id }}</h1>
+    <h1>Elevator {{ elevatorId }}</h1>
     <p>Is Moving: {{ moving }}</p>
     <p>Direction: {{ direction }}</p>
     <p>Current Floor: {{ currentFloor }}</p>
@@ -12,8 +12,8 @@
 export default {
   name: 'elevator',
   props: {
-    id: {
-      type: Number,
+    elevatorId: {
+      type: String,
       required: true,
     },
     bottomFloor: {
@@ -32,19 +32,40 @@ export default {
       type: Boolean,
       default: false,
     },
+    moving: {
+      type: Boolean,
+      default: false,
+    },
+    direction: {
+      type: String,
+      default: 'up',
+    },
+    doorsOpen: {
+      type: Boolean,
+      default: false,
+    },
+    currentFloor: {
+      type: Number,
+      default: 1,
+    },
+    maintenance: {
+      type: Boolean,
+      default: false,
+    },
+    floorsTraveled: {
+      type: Number,
+      default: 0,
+    },
+    trips: {
+      type: Number,
+      default: 0,
+    },
   },
-  data () {
-    return {
-      moving: false,
-      direction: 'up',
-      doorsOpen: false,
-      currentFloor: 1,
-      maintenance: false,
-      floorsTraveled: 0,
-      trips: 0,
-    }
-  },
+
   methods: {
+    /**
+     * Fulfills #2: Each elevator will report as it moves from floor to floor
+     */
     moveOneFloor() {
       if (this.doorsOpen) {
         return this.currentFloor;
@@ -56,7 +77,7 @@ export default {
         this.currentFloor -= 1;
       }
 
-      this.$emit('elevator.moving', this.id, this.moving, this.direction, this.currentFloor);
+      this.$emit('elevator.moving', this.elevatorId, this.moving, this.direction, this.currentFloor);
 
       return this.currentFloor();
     }
@@ -68,7 +89,7 @@ export default {
       }
     },
     doorsOpen() {
-      this.$emit('elevator.doorsOpen', this.id, this.doorsOpen, this.currentFloor);
+      this.$emit('elevator.doorsOpen', this.elevatorId, this.doorsOpen, this.currentFloor);
     },
   }
 }

@@ -4,13 +4,13 @@
  * method (loaded from a store)
  */
 export default {
-  {
-    id: 1000,
+  1000: {
+    // Possibly add initial data here
   },
-  {
-    id: 1001,
+  1001: {
+    // Possibly add initial data here
   },
-  {
-    id: 1002,
-  }
+  1002: {
+    // Possibly add initial data here
+  },
 };
