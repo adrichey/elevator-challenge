@@ -71,6 +71,9 @@ export default {
         return this.currentFloor;
       }
 
+      /**
+       * Fulfills #5 and #6
+       */
       if (this.direction === 'up' && this.currentFloor < this.floors) {
         this.currentFloor += 1;
       } else if (this.direction === 'down' && this.currentFloor > this.bottomFloor) {
@@ -88,6 +91,9 @@ export default {
         this.moveOneFloor();
       }
     },
+    /**
+     * Fulfills #3: Each elevator will report when it opens or closes its doors
+     */
     doorsOpen() {
       this.$emit('elevator.doorsOpen', this.elevatorId, this.doorsOpen, this.currentFloor);
     },
