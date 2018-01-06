@@ -1,5 +1,10 @@
 <template>
   <div class="elevator">
+    <h1>Elevator {{ id }}</h1>
+    <p>Is Moving: {{ moving }}</p>
+    <p>Direction: {{ direction }}</p>
+    <p>Current Floor: {{ currentFloor }}</p>
+    <p>Doors Open: {{ doorsOpen }}</p>
   </div>
 </template>
 
@@ -34,6 +39,9 @@ export default {
       direction: 'up',
       doorsOpen: false,
       currentFloor: 1,
+      maintenance: false,
+      floorsTraveled: 0,
+      trips: 0,
     }
   },
   methods: {
@@ -65,6 +73,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>

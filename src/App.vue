@@ -1,5 +1,11 @@
 <template>
   <div id="app">
+    <nav>
+      <select v-model="floorRequested">
+        <option v-for="floor in floors" :key="floor">{{ floor }}</option>
+      </select>
+      <button type="button" @click.stop.prevent="sendRequest">Send Request</button>
+    </nav>
     <elevator
       v-for="(elevator, index) in elevators" :key="index"
       :floors="floors"
@@ -7,7 +13,6 @@
       :current-tick="currentTick"
       :requested="requested"
       :id="elevator.id"></elevator>
-    <button type="button" @stop.prevent.click="requested = true">Send Request</button>
   </div>
 </template>
 
@@ -23,7 +28,7 @@ export default {
   data () {
     return {
       bottomFloor: 1,
-      floors: 10,
+      floors: 14,
       requested: false,
       elevators: data,
       started: false,
@@ -63,5 +68,15 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+nav {
+  margin: 20px;
+  text-align: left;
+}
+
+.elevator {
+  float: left;
+  margin: 20px;
 }
 </style>
