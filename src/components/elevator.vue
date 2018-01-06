@@ -7,22 +7,40 @@
 export default {
   name: 'elevator',
   props: {
+    id: {
+      type: Number,
+      required: true,
+    },
+    floors: {
+      type: Number,
+      default: 0,
+    },
     currentTick: {
       type: Number,
       default: 0,
     },
+    requested: {
+      type: Boolean,
+      default: true,
+    },
   },
   data () {
     return {
-      floors: 1,
-      isMoving: false,
+      moving: false,
       direction: 'up',
       doorsOpen: false,
+      currentFloor: 1,
     }
   },
   watch: {
     currentTick() {
-      // TO DO - Flesh this out
+      if (this.moving) {
+        this.currentFloor += 1;
+        this.$emit('elevator.moving', this.moving, this.direction, this.currentFloor);
+      }
+    },
+    doorsOpen() {
+      this.$emit('elevator.doorsOpen', this.doorsOpen, this.currentFloor);
     }
   }
 }

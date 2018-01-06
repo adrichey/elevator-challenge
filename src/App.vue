@@ -4,7 +4,9 @@
       v-for="(elevator, index) in elevators" :key="index"
       :floors="floors"
       :current-tick="currentTick"
-      :is-moving="elevator.isMoving"></elevator>
+      :requested="requested"
+      :id="elevator.id"></elevator>
+    <button type="button" @stop.prevent.click="requested = true">Send Request</button>
   </div>
 </template>
 
@@ -21,10 +23,11 @@ export default {
     return {
       bottomFloor: 1,
       floors: 1,
-      isRequested: false,
+      requested: false,
       elevators: data,
       started: false,
       interval: null,
+      currentTick: 0,
     }
   },
   mounted() {
@@ -35,11 +38,7 @@ export default {
   methods: {
     relayInformationToElevators() {
       if (this.started) {
-        const elevatorsLength = this.elevators.length;
-        let i;
-        for (i = 0; i < elevatorsLength; i += 1) {
-          this.elevators.currentTick = Date.now();
-        }
+        this.currentTick = Date.now();
       }
     }
   },
@@ -51,16 +50,6 @@ export default {
         clearInterval(this.interval);
       }
     },
-    isRequested(flag) {
-      if (flag) {
-        const elevatorsLength = this.elevators.length;
-        let i;
-        for (i = 0; i < elevatorsLength; i += 1) {
-          if ()
-          this.elevators.currentTick = Date.now();
-        }
-      }
-    }
   }
 };
 </script>

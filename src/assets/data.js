@@ -5,9 +5,12 @@
  */
 export default [
   {
-    isMoving: false,
+    id: 1000,
   },
   {
-    isMoving: false,
+    id: 1001,
+  },
+  {
+    id: 1002,
   }
 ];
