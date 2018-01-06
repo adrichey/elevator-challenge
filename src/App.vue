@@ -4,7 +4,7 @@
       <select v-model="floorRequested">
         <option v-for="floor in floors" :key="floor">{{ floor }}</option>
       </select>
-      <button type="button" @click.stop.prevent="sendRequest">Send Request</button>
+      <button type="button" @click.stop.prevent="requested = true">Send Request</button>
     </nav>
     <elevator
       v-for="(elevator, index) in elevators" :key="index"
@@ -12,7 +12,9 @@
       :bottom-floor="bottomFloor"
       :current-tick="currentTick"
       :requested="requested"
-      :id="elevator.id"></elevator>
+      :floor-requested="floorRequested"
+      :id="elevator.id"
+      @requestAnswered="requestAnswered(elevator.id)"></elevator>
   </div>
 </template>
 
@@ -34,6 +36,7 @@ export default {
       started: false,
       interval: null,
       currentTick: 0,
+      floorRequested: 1,
     }
   },
   mounted() {
@@ -46,6 +49,9 @@ export default {
       if (this.started) {
         this.currentTick = Date.now();
       }
+    },
+    requestAnswered(elevatorId) {
+      // TODO
     }
   },
   watch: {

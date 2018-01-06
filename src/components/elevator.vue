@@ -56,7 +56,7 @@ export default {
         this.currentFloor -= 1;
       }
 
-      this.$emit('elevator.moving', this.moving, this.direction, this.currentFloor);
+      this.$emit('elevator.moving', this.id, this.moving, this.direction, this.currentFloor);
 
       return this.currentFloor();
     }
@@ -68,8 +68,8 @@ export default {
       }
     },
     doorsOpen() {
-      this.$emit('elevator.doorsOpen', this.doorsOpen, this.currentFloor);
-    }
+      this.$emit('elevator.doorsOpen', this.id, this.doorsOpen, this.currentFloor);
+    },
   }
 }
 </script>

@@ -3,7 +3,7 @@
  * In an ideal world, this would be loaded via AJAX or another initialization
  * method (loaded from a store)
  */
-export default [
+export default {
   {
     id: 1000,
   },
@@ -13,4 +13,4 @@ export default [
   {
     id: 1002,
   }
-];
+};
